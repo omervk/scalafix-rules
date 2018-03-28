@@ -1,4 +1,5 @@
 # Omer's Scalafix Rules
+[![Build Status](https://travis-ci.org/omervk/scalafix-rules.svg?branch=master)](https://travis-ci.org/omervk/scalafix-rules)
 
 This project is a work in progress of rules being migrated from [WartRemover](http://wartremover.org/) to [scalafix](https://scalacenter.github.io/scalafix/).
 For more rules from WartRemover, see [ScalafixWartremover](https://github.com/vovapolu/ScalafixWartremover).
