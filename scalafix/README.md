@@ -1,0 +1,32 @@
+# Omer's Scalafix Rules
+
+## Running
+
+1. [Install the scalafix sbt plugin](https://scalacenter.github.io/scalafix/docs/users/installation)
+2. Run `sbt "scalafixCli --rules github:omervk/scalafix-rules/v1"` 
+
+## Rules
+
+### ExposedTuples
+
+Tuples are described not by their semantic meaning, but by their types alone, which requires users of your API to either create that meaning themselves using unapply or to use the ugly _1, _2, ... accessors.
+
+Public API should refrain from exposing tuples and should instead consider using custom case classes to add semantic meaning.
+
+```scala
+// Won't compile:
+// | Avoid using tuples in public interfaces, as they only supply type information.
+// | Consider using a custom case class to add semantic meaning.
+def badFoo(customerTotal: (String, Long)) = {
+  // Code
+}
+```
+```scala
+// Custom case class with added semantic meaning
+final case class CustomerAccount(customerId: String, accountTotal: Long)
+
+// Will compile
+def goodFoo(customerTotal: CustomerAccount) = {
+  // Code
+}
+```
