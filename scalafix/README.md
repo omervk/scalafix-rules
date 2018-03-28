@@ -1,5 +1,8 @@
 # Omer's Scalafix Rules
 
+This project is a work in progress of rules being migrated from [WartRemover](http://wartremover.org/) to [scalafix](https://scalacenter.github.io/scalafix/).
+For more rules from WartRemover, see [ScalafixWartremover](https://github.com/vovapolu/ScalafixWartremover).
+
 ## Running
 
 1. [Install the scalafix sbt plugin](https://scalacenter.github.io/scalafix/docs/users/installation)
@@ -28,5 +31,18 @@ final case class CustomerAccount(customerId: String, accountTotal: Long)
 // Will compile
 def goodFoo(customerTotal: CustomerAccount) = {
   // Code
+}
+```
+
+### PublicInference
+
+Type inference of public members can expose extra type information, that can break encapsulation.
+
+```scala
+class c {
+  // Won't compile: Public member must have an explicit type ascription
+  def f() = new c with t
+
+  val name: String = "abc" // Compiles
 }
 ```
